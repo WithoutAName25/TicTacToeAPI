@@ -1,5 +1,6 @@
 package eu.withoutaname.plugins
 
+import eu.withoutaname.routes.Error
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.autohead.*
@@ -12,7 +13,7 @@ fun Application.configureRouting() {
     install(Resources)
     install(StatusPages) {
         exception<Throwable> { call, cause ->
-            call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
+            call.respond(HttpStatusCode.InternalServerError, Error("500: $cause"))
         }
     }
 }
