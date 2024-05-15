@@ -7,7 +7,6 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.cachingheaders.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.conditionalheaders.*
-import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
@@ -31,14 +30,14 @@ fun Application.configureHTTP() {
         }
     }
     install(ConditionalHeaders)
-    install(CORS) {
-        allowMethod(HttpMethod.Get)
-        allowMethod(HttpMethod.Post)
-        allowHeader("user_session")
-        exposeHeader("user_session")
-        allowHost("api.tic-tac-toe.withoutaname.eu", listOf("https"))
-        allowHost("mineplay.link", listOf("https"))
-    }
+//    install(CORS) {
+//        allowMethod(HttpMethod.Get)
+//        allowMethod(HttpMethod.Post)
+//        allowHeader("user_session")
+//        exposeHeader("user_session")
+//        allowHost("api.tic-tac-toe.withoutaname.eu", listOf("https"))
+//        allowHost("mineplay.link", listOf("https"))
+//    }
 //    install(ForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
 //    install(XForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
     install(OpenAPIGen) {
