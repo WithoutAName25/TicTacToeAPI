@@ -35,6 +35,8 @@ fun Application.configureHTTP() {
         allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Post)
         allowMethod(HttpMethod.Head)
+        allowHeader("Content-Type")
+        exposeHeader("Content-Type")
         allowHeader("user_session")
         exposeHeader("user_session")
         allowHost("api.tic-tac-toe.withoutaname.eu", listOf("https"))
