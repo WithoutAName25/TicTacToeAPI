@@ -35,13 +35,17 @@ fun Application.configureHTTP() {
         allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Post)
         allowMethod(HttpMethod.Head)
-        allowHeader("Content-Type")
-        exposeHeader("Content-Type")
+        allowHeader(HttpHeaders.ContentType)
+        exposeHeader(HttpHeaders.ContentType)
         allowHeader("user_session")
         exposeHeader("user_session")
         allowHost("api.tic-tac-toe.withoutaname.eu", listOf("https"))
         allowHost("mineplay.link", listOf("https"))
-        allowHost("localhost", listOf("http"))
+        allowHost("localhost")
+        allowOrigins {
+            println(it)
+            it.matches(Regex("https?://localhost:[0-9]+"))
+        }
     }
 //    install(ForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
 //    install(XForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
