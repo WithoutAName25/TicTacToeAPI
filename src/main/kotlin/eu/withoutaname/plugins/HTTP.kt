@@ -42,10 +42,8 @@ fun Application.configureHTTP() {
         allowHost("api.tic-tac-toe.withoutaname.eu", listOf("https"))
         allowHost("mineplay.link", listOf("https"))
         allowHost("localhost")
-        allowOrigins {
-            println(it)
-            it.matches(Regex("https?://localhost:[0-9]+"))
-        }
+        val allowedLocalhostRegex = Regex("https?://localhost:\\d+")
+        allowOrigins(allowedLocalhostRegex::matches)
     }
 //    install(ForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
 //    install(XForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
