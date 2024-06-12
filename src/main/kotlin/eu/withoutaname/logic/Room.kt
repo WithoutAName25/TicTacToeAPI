@@ -8,6 +8,7 @@ class Room(val name: String) {
     val chat = Chat()
     var game: Game? = null
         private set
+    var deleted = false
 
     val data: RoomData
         get() = RoomData(name, users.map { it.username })
@@ -17,6 +18,7 @@ class Room(val name: String) {
 
     fun join(user: User) {
         synchronized(users) {
+            if (deleted) return
             if (user.room != null) return
 
             user.room = this
@@ -26,10 +28,24 @@ class Room(val name: String) {
 
     fun leave(user: User) {
         synchronized(users) {
+            if (deleted) return
             if (user.room != this) return
 
             user.room = null
             users.remove(user)
+
+            if (users.isEmpty()) {
+                Lobby.removeRoom(name)
+            }
+        }
+    }
+
+    fun clear() {
+        synchronized(users) {
+            for (user in users) {
+                user.room = null
+            }
+            deleted = true
         }
     }
 

@@ -19,5 +19,9 @@ object Lobby {
     }
 
     fun getRoom(roomName: String) = rooms[roomName]
+
+    fun removeRoom(roomName: String) {
+        rooms.remove(roomName)?.clear()
+    }
 }
 
