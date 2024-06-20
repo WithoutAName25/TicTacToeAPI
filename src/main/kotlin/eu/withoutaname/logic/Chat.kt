@@ -18,20 +18,21 @@ class Chat {
 
     fun getMessages(sinceId: Int = 0): List<Message> {
         val nextId = nextIdCounter.get()
+        if (sinceId == nextId) return emptyList()
+
         val start = if (sinceId < 0 || sinceId < nextId - HISTORY_LENGTH || sinceId > nextId) {
             max(0, nextId - HISTORY_LENGTH)
         } else {
             sinceId
         }
-        if (start == nextId) return emptyList()
 
         @Suppress("UNCHECKED_CAST")
         return if (start % HISTORY_LENGTH > (nextId - 1) % HISTORY_LENGTH) {
-            val firstSlice = history.slice(start until HISTORY_LENGTH)
-            val secondSlice = history.slice(0 until nextId)
+            val firstSlice = history.slice(start % HISTORY_LENGTH until HISTORY_LENGTH)
+            val secondSlice = history.slice(0 until nextId % HISTORY_LENGTH)
             firstSlice + secondSlice
         } else {
-            history.slice(start until nextId)
+            history.slice(start % HISTORY_LENGTH until nextId % HISTORY_LENGTH)
         } as List<Message>
     }
 }
