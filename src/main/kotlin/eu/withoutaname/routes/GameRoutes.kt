@@ -80,7 +80,7 @@ fun NormalOpenAPIRoute.gameRoutes() {
 
         route("status")
             .throws(notInRoomException, noGameStartedException)
-            .get<MessagesParameters, GameStatus>(
+            .get<SessionParameter, GameStatus>(
                 example = GameStatus(
                     arrayOf(
                         arrayOf(Field.EMPTY, Field.EMPTY, Field.X),
