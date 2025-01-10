@@ -20,8 +20,8 @@ fun NormalOpenAPIRoute.lobbyRoutes() {
             .get<SessionParameter, LobbyStatus>(
                 example = LobbyStatus.InLobby(
                     listOf(
-                        RoomData("CoolRoom", listOf("PlayerA")),
-                        RoomData("Room2", listOf("PlayerC", "Bot1"))
+                        RoomData("CoolRoom", listOf("PlayerA"), true),
+                        RoomData("Room2", listOf("PlayerC", "Bot1"), false)
                     )
                 )
             ) {
@@ -121,7 +121,7 @@ val roomNotFoundException = APIException.apiException<RoomNotFoundException, Err
     RoomNotFoundError
 }
 
-data class RoomData(val name: String, val users: List<String>)
+data class RoomData(val name: String, val users: List<String>, val hasGame: Boolean)
 
 sealed class LobbyStatus(val status: String) : Response(true) {
     data class InLobby(val rooms: List<RoomData>) : LobbyStatus("in-lobby")

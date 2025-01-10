@@ -11,7 +11,7 @@ class Room(val name: String) {
     var deleted = false
 
     val data: RoomData
-        get() = RoomData(name, users.map { it.username })
+        get() = RoomData(name, users.map { it.username }, game != null)
 
     val status: LobbyStatus.InRoom
         get() = LobbyStatus.InRoom(data)
@@ -19,9 +19,10 @@ class Room(val name: String) {
     fun join(user: User) {
         synchronized(users) {
             if (deleted) return
-            if (user.room != null) return
-
-            user.room = this
+            synchronized(user) {
+                if (user.room != null) return
+                user.room = this
+            }
             users.add(user)
         }
     }

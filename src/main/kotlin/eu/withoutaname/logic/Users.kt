@@ -8,7 +8,9 @@ object Users {
 
     fun addUser(user: User): UserSession {
         val userSession = UserSession()
-        users[userSession.id] = user
+        synchronized(users) {
+            users[userSession.id] = user
+        }
         return userSession
     }
 
