@@ -34,8 +34,7 @@ fun NormalOpenAPIRoute.gameRoutes() {
                         arrayOf(Field.EMPTY, Field.EMPTY, Field.EMPTY)
                     ),
                     PlayerType.O,
-                    true,
-                    false,
+                    PlayerInfo(PlayerType.X, "PlayerX", false),
                     false,
                     false,
                     null
@@ -62,8 +61,7 @@ fun NormalOpenAPIRoute.gameRoutes() {
                         arrayOf(Field.EMPTY, Field.EMPTY, Field.EMPTY)
                     ),
                     PlayerType.X,
-                    true,
-                    false,
+                    PlayerInfo(PlayerType.X, "PlayerX", true),
                     false,
                     false,
                     null
@@ -88,8 +86,7 @@ fun NormalOpenAPIRoute.gameRoutes() {
                         arrayOf(Field.EMPTY, Field.EMPTY, Field.EMPTY)
                     ),
                     PlayerType.O,
-                    true,
-                    false,
+                    PlayerInfo(PlayerType.X, "PlayerX", false),
                     false,
                     false,
                     null
