@@ -57,8 +57,8 @@ class Room(val name: String) {
         if (users.size < 2) {
             throw NotEnoughPlayersException()
         }
-        if (user != users[0]) {
-            throw NotRoomOwnerException()
+        if (user != users[0] || user != users[1]) {
+            throw OnlySpectatorException()
         }
         val game = Game(users[0], users[1])
         this.game = game
@@ -70,4 +70,4 @@ class GameRunningException : Exception()
 
 class NotEnoughPlayersException : Exception()
 
-class NotRoomOwnerException : Exception()
+class OnlySpectatorException : Exception()

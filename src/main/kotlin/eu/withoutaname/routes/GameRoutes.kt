@@ -52,7 +52,7 @@ fun NormalOpenAPIRoute.gameRoutes() {
             }
 
         route("start")
-            .throws(badRequestException, gameRunningException, notEnoughPlayersException, notRoomOwnerException)
+            .throws(badRequestException, gameRunningException, notEnoughPlayersException, onlySpectatorException)
             .post<SessionParameter, GameStatus, Unit>(
                 exampleRequest = Unit,
                 exampleResponse = GameStatus(
@@ -154,11 +154,11 @@ val notEnoughPlayersException = APIException.apiException<NotEnoughPlayersExcept
     NotEnoughPlayersError
 }
 
-object NotRoomOwnerError : Error("You are not the room owner!")
+object OnlySpectatorError : Error("You are only spectator in this room!")
 
-val notRoomOwnerException = APIException.apiException<NotRoomOwnerException, Error>(
+val onlySpectatorException = APIException.apiException<OnlySpectatorException, Error>(
     HttpStatusCode.Forbidden,
-    NotRoomOwnerError
+    OnlySpectatorError
 ) {
-    NotRoomOwnerError
+    OnlySpectatorError
 }
