@@ -1,10 +1,11 @@
 package eu.withoutaname.logic
 
 import eu.withoutaname.routes.Response
+import kotlin.random.Random
 
 class Game(val playerX: User, val playerO: User) {
     private val board = Array(3) { Array(3) { Field.EMPTY } }
-    private var currentPlayer: User? = playerX
+    private var currentPlayer: User? = if (Random.nextBoolean()) playerX else playerO
 
     private val winner: User?
         get() {

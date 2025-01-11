@@ -30,9 +30,10 @@ class Room(val name: String) {
     fun leave(user: User) {
         synchronized(users) {
             if (deleted) return
-            if (user.room != this) return
-
-            user.room = null
+            synchronized(user) {
+                if (user.room != this) return
+                user.room = null
+            }
             users.remove(user)
 
             if (users.isEmpty()) {
