@@ -60,11 +60,10 @@ class Game(val playerX: User, val playerO: User) {
                 playerO -> PlayerType.O
                 else -> PlayerType.SPECTATOR
             },
-            user == currentPlayer,
+            PlayerInfo.from(currentPlayer, user, playerX, playerO),
             finished,
             draw,
-            winner == user,
-            winner?.username
+            PlayerInfo.from(winner, user, playerX, playerO)
         )
     }
 }
@@ -76,15 +75,31 @@ enum class Field {
 data class GameStatus(
     val board: Array<Array<Field>>,
     val playerType: PlayerType,
-    val isCurrentPlayer: Boolean,
+    val currentPlayer: PlayerInfo?,
     val isFinished: Boolean,
     val isDraw: Boolean,
-    val isWinner: Boolean,
-    val winnerName: String?
+    val winner: PlayerInfo?,
 ) : Response(true)
 
 enum class PlayerType {
     SPECTATOR, X, O
+}
+
+data class PlayerInfo(val type: PlayerType, val username: String, val isMe: Boolean) {
+    companion object {
+        fun from(user: User?, me: User, playerX: User, playerO: User): PlayerInfo? {
+            if (user == null) return null
+            return PlayerInfo(
+                when (user) {
+                    playerX -> PlayerType.X
+                    playerO -> PlayerType.O
+                    else -> PlayerType.SPECTATOR
+                },
+                user.username,
+                user == me
+            )
+        }
+    }
 }
 
 class IllegalMoveException : Exception()
