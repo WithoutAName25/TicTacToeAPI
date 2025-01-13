@@ -2,7 +2,7 @@
 kotlin = "1.9.23"
 ktor = "2.3.10"
 ktor-openapi-generator = "0.6.1"
-logback = "1.4.14"
+logback = "1.5.16"
 kotlinx-datetime = "0.6.1"
 
 [libraries]
