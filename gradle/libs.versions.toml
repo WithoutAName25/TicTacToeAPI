@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.23"
-ktor = "2.3.10"
+ktor = "2.3.13"
 ktor-openapi-generator = "0.6.1"
 logback = "1.4.14"
 kotlinx-datetime = "0.6.1"
