@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.9.23"
+kotlin = "2.1.0"
 ktor = "2.3.10"
 ktor-openapi-generator = "0.6.1"
 logback = "1.4.14"
