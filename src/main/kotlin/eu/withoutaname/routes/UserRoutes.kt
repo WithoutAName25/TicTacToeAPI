@@ -32,6 +32,15 @@ fun NormalOpenAPIRoute.userRoutes() {
                 val session = pipeline.call.sessions.get<UserSession>() ?: throw InvalidSessionException()
                 respond(Users.getUser(session).status)
             }
+        route("delete")
+            .throws(invalidSessionException, missingFieldExeption)
+            .post<SessionParameter, Response, Unit>(
+                exampleResponse = Success
+            ) { _, _ ->
+                val session = pipeline.call.sessions.get<UserSession>() ?: throw InvalidSessionException()
+                Users.deleteUser(session)
+                respond(Success)
+            }
     }
 }
 

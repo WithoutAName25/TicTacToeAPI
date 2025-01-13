@@ -37,12 +37,10 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson")
     implementation("dev.forst:ktor-openapi-generator:0.6.1")
     implementation("io.ktor:ktor-server-sessions")
-//    implementation("org.jetbrains.exposed:exposed-core:0.41.1")
-//    implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
-//    implementation("com.h2database:h2:2.1.214")
     implementation("io.ktor:ktor-server-websockets-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
