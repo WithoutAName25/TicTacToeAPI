@@ -3,7 +3,7 @@ kotlin = "2.1.10"
 ktor = "2.3.13"
 ktor-openapi-generator = "0.6.1"
 logback = "1.5.16"
-kotlinx-datetime = "0.6.1"
+kotlinx-datetime = "0.6.2"
 
 [libraries]
 ktor-server-auto-head-response = { group = "io.ktor", name = "ktor-server-auto-head-response-jvm", version.ref = "ktor" }
