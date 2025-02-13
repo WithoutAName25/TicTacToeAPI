@@ -43,7 +43,10 @@ object Users {
                 val inactiveDuration = now.epochSeconds - lastAccessedTime.epochSeconds
                 val remove = inactiveDuration > INACTIVITY_THRESHOLD
                 if (remove) synchronized(users) {
-                    users.remove(id)?.room?.leave(users[id]!!)
+                    val user = users.remove(id)
+                    if (user != null) {
+                        user.room?.leave(user)
+                    }
                 }
                 remove
             }

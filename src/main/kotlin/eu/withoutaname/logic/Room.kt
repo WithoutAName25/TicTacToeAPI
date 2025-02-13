@@ -8,7 +8,7 @@ class Room(val name: String) {
     val chat = Chat()
     var game: Game? = null
         private set
-    var deleted = false
+    private var deleted = false
 
     val data: RoomData
         get() = RoomData(name, users.map { it.username }, game != null)
