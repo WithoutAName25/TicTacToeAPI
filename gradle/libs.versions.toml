@@ -4,57 +4,72 @@ ktor = "2.3.13"
 ktor-openapi-generator = "0.6.1"
 logback = "1.5.18"
 kotlinx-datetime = "0.6.2"
+kotlinx-serialization-json = "1.6.0"
 
 [libraries]
+# Server
+ktor-openapi-generator = { group = "dev.forst", name = "ktor-openapi-generator", version.ref = "ktor-openapi-generator" }
+ktor-serialization-jackson = { group = "io.ktor", name = "ktor-serialization-jackson", version.ref = "ktor" }
 ktor-server-auto-head-response = { group = "io.ktor", name = "ktor-server-auto-head-response-jvm", version.ref = "ktor" }
-ktor-server-core = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktor" }
-ktor-server-resources = { group = "io.ktor", name = "ktor-server-resources", version.ref = "ktor" }
-ktor-server-host-common = { group = "io.ktor", name = "ktor-server-host-common-jvm", version.ref = "ktor" }
-ktor-server-status-pages = { group = "io.ktor", name = "ktor-server-status-pages-jvm", version.ref = "ktor" }
 ktor-server-caching-headers = { group = "io.ktor", name = "ktor-server-caching-headers-jvm", version.ref = "ktor" }
 ktor-server-compression = { group = "io.ktor", name = "ktor-server-compression-jvm", version.ref = "ktor" }
 ktor-server-conditional-headers = { group = "io.ktor", name = "ktor-server-conditional-headers-jvm", version.ref = "ktor" }
+ktor-server-content-negotiation = { group = "io.ktor", name = "ktor-server-content-negotiation-jvm", version.ref = "ktor" }
+ktor-server-core = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktor" }
 ktor-server-cors = { group = "io.ktor", name = "ktor-server-cors-jvm", version.ref = "ktor" }
 ktor-server-forwarded-header = { group = "io.ktor", name = "ktor-server-forwarded-header-jvm", version.ref = "ktor" }
-ktor-server-content-negotiation = { group = "io.ktor", name = "ktor-server-content-negotiation-jvm", version.ref = "ktor" }
-ktor-serialization-jackson = { group = "io.ktor", name = "ktor-serialization-jackson", version.ref = "ktor" }
-ktor-openapi-generator = { group = "dev.forst", name = "ktor-openapi-generator", version.ref = "ktor-openapi-generator" }
-ktor-server-sessions = { group = "io.ktor", name = "ktor-server-sessions", version.ref = "ktor" }
-ktor-server-websockets = { group = "io.ktor", name = "ktor-server-websockets-jvm", version.ref = "ktor" }
+ktor-server-host-common = { group = "io.ktor", name = "ktor-server-host-common-jvm", version.ref = "ktor" }
 ktor-server-netty = { group = "io.ktor", name = "ktor-server-netty-jvm", version.ref = "ktor" }
+ktor-server-resources = { group = "io.ktor", name = "ktor-server-resources", version.ref = "ktor" }
+ktor-server-sessions = { group = "io.ktor", name = "ktor-server-sessions", version.ref = "ktor" }
+ktor-server-status-pages = { group = "io.ktor", name = "ktor-server-status-pages-jvm", version.ref = "ktor" }
+ktor-server-websockets = { group = "io.ktor", name = "ktor-server-websockets-jvm", version.ref = "ktor" }
+
+# Client
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-client-resources = { group = "io.ktor", name = "ktor-client-resources", version.ref = "ktor" }
+
+# Common
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 logback-classic = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
-ktor-server-tests = { group = "io.ktor", name = "ktor-server-tests-jvm", version.ref = "ktor" }
-kotlin-test-junit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin" }
 
 [bundles]
-ktor-server = [
+server = [
+    "ktor-openapi-generator",
+    "ktor-serialization-jackson",
     "ktor-server-auto-head-response",
-    "ktor-server-core",
-    "ktor-server-resources",
-    "ktor-server-host-common",
-    "ktor-server-status-pages",
     "ktor-server-caching-headers",
     "ktor-server-compression",
     "ktor-server-conditional-headers",
+    "ktor-server-content-negotiation",
+    "ktor-server-core",
     "ktor-server-cors",
     "ktor-server-forwarded-header",
-    "ktor-server-content-negotiation",
-    "ktor-serialization-jackson",
+    "ktor-server-host-common",
+    "ktor-server-netty",
+    "ktor-server-resources",
     "ktor-server-sessions",
-    "ktor-server-websockets",
-    "ktor-server-netty"
+    "ktor-server-status-pages",
+    "ktor-server-websockets"
 ]
 
-testing-tools = [
-    "ktor-server-tests",
-    "kotlin-test-junit"
+client = [
+    "ktor-client-core",
+    "ktor-client-cio",
+    "ktor-client-content-negotiation",
+    "ktor-client-logging",
+    "ktor-client-resources"
 ]
 
-logging-tools = [
-    "logback-classic"
+common = [
+    "kotlinx-serialization-json",
+    "logback-classic",
+    "kotlinx-datetime"
 ]
-
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

@@ -1,18 +1,19 @@
 FROM openjdk:17-slim AS build
 WORKDIR /home/gradle/src
 
-COPY build.gradle.kts build.gradle.kts
-COPY gradle.properties gradle.properties
-COPY gradlew gradlew
-COPY settings.gradle.kts settings.gradle.kts
+COPY client/build.gradle.kts client/
+COPY common/build.gradle.kts common/
+COPY server/build.gradle.kts server/
 COPY gradle/ gradle/
+COPY build.gradle.kts gradle.properties gradlew settings.gradle.kts ./
 RUN ./gradlew build --no-daemon
 
-COPY src/ src/
-RUN ./gradlew build --no-daemon
+COPY common/src/ common/src/
+COPY server/src/ server/src/
+RUN ./gradlew :server:build --no-daemon
 
 
 FROM openjdk:17-slim
 WORKDIR /app/data
-COPY --from=build /home/gradle/src/build/libs/*-all.jar /app/app.jar
+COPY --from=build /home/gradle/src/server/build/libs/*-all.jar /app/app.jar
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
