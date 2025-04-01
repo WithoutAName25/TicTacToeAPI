@@ -4,7 +4,7 @@ ktor = "2.3.13"
 ktor-openapi-generator = "0.6.1"
 logback = "1.5.18"
 kotlinx-datetime = "0.6.2"
-kotlinx-serialization-json = "1.8.0"
+kotlinx-serialization-json = "1.8.1"
 
 [libraries]
 # Server
